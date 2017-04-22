@@ -116,6 +116,70 @@
 
     </ol></li>
 
+    <li class="apidocModuleLi"><a href="#apidoc.module.node-emoji.emoji">module node-emoji.emoji</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.node-emoji.emoji._get">
+            function <span class="apidocSignatureSpan">node-emoji.emoji.</span>_get
+            <span class="apidocSignatureSpan">(emoji)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.node-emoji.emoji.emojify">
+            function <span class="apidocSignatureSpan">node-emoji.emoji.</span>emojify
+            <span class="apidocSignatureSpan">(str, on_missing)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.node-emoji.emoji.get">
+            function <span class="apidocSignatureSpan">node-emoji.emoji.</span>get
+            <span class="apidocSignatureSpan">(emoji)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.node-emoji.emoji.random">
+            function <span class="apidocSignatureSpan">node-emoji.emoji.</span>random
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.node-emoji.emoji.search">
+            function <span class="apidocSignatureSpan">node-emoji.emoji.</span>search
+            <span class="apidocSignatureSpan">(str)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.node-emoji.emoji.which">
+            function <span class="apidocSignatureSpan">node-emoji.emoji.</span>which
+            <span class="apidocSignatureSpan">(emoji_code)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">node-emoji.</span>emoji</span>
+
+        </li>
+
+    </ol></li>
+
 </ol></div>
 
 <div class="apidocSectionDiv">
@@ -135,7 +199,23 @@
   }
   return ':' + emoji + ':';
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+* get emoji code from :emoji: string or name
+* @param  {string} emoji
+* @return {string}
+*/
+Emoji.get = function get(emoji) {
+ emoji = trim(emoji);
+
+ return Emoji.<span class="apidocCodeKeywordSpan">_get</span>(emoji);
+};
+
+/**
+* get emoji name from code
+* @param  {string} emoji_code
+* @return {string}
+*/
+...</pre></li>
     </ul>
 
 
@@ -307,6 +387,250 @@ Then run `npm run-script emojiparse` in the project directory or `node emojipars
     <h2>
         <a href="#apidoc.element.node-emoji.which" id="apidoc.element.node-emoji.which">
         function <span class="apidocSignatureSpan">node-emoji.</span>which
+        <span class="apidocSignatureSpan">(emoji_code)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function which(emoji_code) {
+  for (var prop in Emoji.emoji) {
+    if (Emoji.emoji.hasOwnProperty(prop)) {
+      if (Emoji.emoji[prop].codePointAt() === emoji_code.codePointAt()) {
+        return prop;
+      }
+    }
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+You're now ready to use emoji in your node projects! Awesome! :metal:
+
+## Usage
+```javascript
+var emoji = require('node-emoji')
+emoji.get('coffee') // returns the emoji code for coffee (displays emoji on terminals that support it)
+emoji.<span class="apidocCodeKeywordSpan">which</span>(emoji.get('coffee')) // returns the string "coffee"
+emoji.get(':fast_forward:') // `.get` also supports github flavored markdown emoji (http://www.emoji-cheat-sheet.com/)
+emoji.emojify('I :heart: :coffee:!') // replaces all :emoji: with the actual emoji, in this case: returns "I â¤ï¸ â˜•ï¸!&amp;#
+x22;
+emoji.random() // returns a random emoji + key, e.g. `{ emoji: 'â¤ï¸', key: 'heart' }`
+emoji.search('cof') // returns an array of objects with matching emoji's. `[{ emoji: 'â˜•ï¸', key: 'coffee
+' }, { emoji: âš°', key: 'coffin'}]`
+```
+
+## Adding new emoji
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.node-emoji.emoji" id="apidoc.module.node-emoji.emoji">module node-emoji.emoji</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.node-emoji.emoji._get" id="apidoc.element.node-emoji.emoji._get">
+        function <span class="apidocSignatureSpan">node-emoji.emoji.</span>_get
+        <span class="apidocSignatureSpan">(emoji)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function _get(emoji) {
+  if (Emoji.emoji.hasOwnProperty(emoji)) {
+    return Emoji.emoji[emoji];
+  }
+  return ':' + emoji + ':';
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+* get emoji code from :emoji: string or name
+* @param  {string} emoji
+* @return {string}
+*/
+Emoji.get = function get(emoji) {
+ emoji = trim(emoji);
+
+ return Emoji.<span class="apidocCodeKeywordSpan">_get</span>(emoji);
+};
+
+/**
+* get emoji name from code
+* @param  {string} emoji_code
+* @return {string}
+*/
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.node-emoji.emoji.emojify" id="apidoc.element.node-emoji.emoji.emojify">
+        function <span class="apidocSignatureSpan">node-emoji.emoji.</span>emojify
+        <span class="apidocSignatureSpan">(str, on_missing)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function emojify(str, on_missing) {
+  if (!str) return '';
+
+  return str.split(parser) // parse emoji via regex
+            .map(function parseEmoji(s, i) {
+              // every second element is an emoji, e.g. "test :fast_forward:" -&gt; [ "test ", "fast_forward" ]
+              if (i % 2 === 0) return s;
+              var emoji = Emoji._get(s);
+              if (emoji.indexOf(':') &gt; -1 &amp;&amp; typeof on_missing === 'function') {
+                return on_missing(emoji.substr(1, emoji.length-2));
+              }
+              return emoji;
+            })
+            .join('') // convert back to string
+  ;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+## Usage
+```javascript
+var emoji = require('node-emoji')
+emoji.get('coffee') // returns the emoji code for coffee (displays emoji on terminals that support it)
+emoji.which(emoji.get('coffee')) // returns the string "coffee"
+emoji.get(':fast_forward:') // `.get` also supports github flavored markdown emoji (http://www.emoji-cheat-sheet.com/)
+emoji.<span class="apidocCodeKeywordSpan">emojify</span>('I :heart: :coffee:!') // replaces all :emoji: with the actual
+ emoji, in this case: returns "I â¤ï¸ â˜•ï¸!"
+emoji.random() // returns a random emoji + key, e.g. `{ emoji: 'â¤ï¸', key: 'heart' }`
+emoji.search('cof') // returns an array of objects with matching emoji's. `[{ emoji: 'â˜•ï¸', key: 'coffee
+' }, { emoji: âš°', key: 'coffin'}]`
+```
+
+## Adding new emoji
+Emoji come from js-emoji (Thanks a lot :thumbsup:). You can get a JSON file with all emoji here: https://raw.githubusercontent.com
+/omnidan/node-emoji/master/lib/emoji.json
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.node-emoji.emoji.get" id="apidoc.element.node-emoji.emoji.get">
+        function <span class="apidocSignatureSpan">node-emoji.emoji.</span>get
+        <span class="apidocSignatureSpan">(emoji)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function get(emoji) {
+  emoji = trim(emoji);
+
+  return Emoji._get(emoji);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Once you have that set-up, just run `npm install --save node-emoji` in your project directory. :ship:
+
+You're now ready to use emoji in your node projects! Awesome! :metal:
+
+## Usage
+```javascript
+var emoji = require('node-emoji')
+emoji.<span class="apidocCodeKeywordSpan">get</span>('coffee') // returns the emoji code for coffee (displays emoji on
+ terminals that support it)
+emoji.which(emoji.get('coffee')) // returns the string "coffee"
+emoji.get(':fast_forward:') // `.get` also supports github flavored markdown emoji (http://www.emoji-cheat-sheet.com/)
+emoji.emojify('I :heart: :coffee:!') // replaces all :emoji: with the actual emoji, in this case: returns "I â¤ï¸ â˜•ï¸!&amp;#
+x22;
+emoji.random() // returns a random emoji + key, e.g. `{ emoji: 'â¤ï¸', key: 'heart' }`
+emoji.search('cof') // returns an array of objects with matching emoji's. `[{ emoji: 'â˜•ï¸', key: 'coffee
+' }, { emoji: âš°', key: 'coffin'}]`
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.node-emoji.emoji.random" id="apidoc.element.node-emoji.emoji.random">
+        function <span class="apidocSignatureSpan">node-emoji.emoji.</span>random
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function random() {
+  var emojiKeys = Object.keys(Emoji.emoji);
+  var randomIndex = Math.floor(Math.random() * emojiKeys.length);
+  var key = emojiKeys[randomIndex];
+  var emoji = Emoji._get(key);
+  return {key: key, emoji: emoji};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## Usage
+```javascript
+var emoji = require('node-emoji')
+emoji.get('coffee') // returns the emoji code for coffee (displays emoji on terminals that support it)
+emoji.which(emoji.get('coffee')) // returns the string "coffee"
+emoji.get(':fast_forward:') // `.get` also supports github flavored markdown emoji (http://www.emoji-cheat-sheet.com/)
+emoji.emojify('I :heart: :coffee:!') // replaces all :emoji: with the actual emoji, in this case: returns "I â¤ï¸ â˜•ï¸!&amp;#
+x22;
+emoji.<span class="apidocCodeKeywordSpan">random</span>() // returns a random emoji + key, e.g. `{ emoji: 'â¤ï¸', key: &amp;#
+x27;heart' }`
+emoji.search('cof') // returns an array of objects with matching emoji's. `[{ emoji: 'â˜•ï¸', key: 'coffee
+' }, { emoji: âš°', key: 'coffin'}]`
+```
+
+## Adding new emoji
+Emoji come from js-emoji (Thanks a lot :thumbsup:). You can get a JSON file with all emoji here: https://raw.githubusercontent.com
+/omnidan/node-emoji/master/lib/emoji.json
+
+To update the list or add custom emoji, clone this repository and put them into `lib/emojifile.js`.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.node-emoji.emoji.search" id="apidoc.element.node-emoji.emoji.search">
+        function <span class="apidocSignatureSpan">node-emoji.emoji.</span>search
+        <span class="apidocSignatureSpan">(str)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function search(str) {
+  var emojiKeys = Object.keys(Emoji.emoji);
+  var matcher = trim(str)
+  var matchingKeys = emojiKeys.filter(function(key) {
+    return key.toString().indexOf(matcher) === 0;
+  });
+  return matchingKeys.map(function(key) {
+    return {
+      key: key,
+      emoji: Emoji._get(key),
+    };
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```javascript
+var emoji = require('node-emoji')
+emoji.get('coffee') // returns the emoji code for coffee (displays emoji on terminals that support it)
+emoji.which(emoji.get('coffee')) // returns the string "coffee"
+emoji.get(':fast_forward:') // `.get` also supports github flavored markdown emoji (http://www.emoji-cheat-sheet.com/)
+emoji.emojify('I :heart: :coffee:!') // replaces all :emoji: with the actual emoji, in this case: returns "I â¤ï¸ â˜•ï¸!&amp;#
+x22;
+emoji.random() // returns a random emoji + key, e.g. `{ emoji: 'â¤ï¸', key: 'heart' }`
+emoji.<span class="apidocCodeKeywordSpan">search</span>('cof') // returns an array of objects with matching emoji'
+;s. `[{ emoji: 'â˜•ï¸', key: 'coffee' }, { emoji: âš°', key: 'coffin'}]`
+```
+
+## Adding new emoji
+Emoji come from js-emoji (Thanks a lot :thumbsup:). You can get a JSON file with all emoji here: https://raw.githubusercontent.com
+/omnidan/node-emoji/master/lib/emoji.json
+
+To update the list or add custom emoji, clone this repository and put them into `lib/emojifile.js`.
+Then run `npm run-script emojiparse` in the project directory or `node emojiparse` in the lib directory.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.node-emoji.emoji.which" id="apidoc.element.node-emoji.emoji.which">
+        function <span class="apidocSignatureSpan">node-emoji.emoji.</span>which
         <span class="apidocSignatureSpan">(emoji_code)</span>
         </a>
     </h2>
